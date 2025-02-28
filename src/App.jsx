@@ -10,6 +10,9 @@ import About from './pages/About'
 import CarDescription from './pages/CarDescription'
 import { useSelector } from 'react-redux'
 import Spinner from './components/Spinner'
+import Profile from './components/Profile'
+import Login from './components/Login'
+import Register from './components/Register'
 const App = () => {
   const load = useSelector(state=> state.carReducer.load)
   return (
@@ -23,6 +26,9 @@ const App = () => {
         <Route path='/about' element={ <About /> } />
         <Route path='/*' element={ <ErrorPage /> } />
         <Route path='/car_description/:id' element={ <CarDescription /> } />
+        <Route path='/profile' element={ <Profile /> } />
+        <Route path='/login' element={ <Login /> } />
+        <Route path='/register' element={ <Register /> } />
       </Routes> 
       <Footer />
     </>  

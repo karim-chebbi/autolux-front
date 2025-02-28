@@ -1,5 +1,5 @@
 "use client";
-
+import { Button } from "antd";
 import { useState } from "react";
 import {
   Dialog,
@@ -26,7 +26,8 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ProfileAvatar from "./ProfileAvatar";
 
 const products = [
   {
@@ -68,6 +69,8 @@ const callsToAction = [
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const navigate = useNavigate()
+
   return (
     <header className="bg-white/30 backdrop-blur-sm sticky top-0 z-40 w-full hover:backdrop-blur-lg transition-all duration-300">
       <nav
@@ -75,7 +78,7 @@ export default function Example() {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <Link  to="/" className="-m-1.5 p-1.5">
+          <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
               alt=""
@@ -151,24 +154,32 @@ export default function Example() {
             </PopoverPanel>
           </Popover>
 
-          <Link to="/showroom" className="text-sm/6 font-semibold text-gray-900">
-            Showroom
-          </Link>
           <Link
-            to="/about"
+            to="/showroom"
             className="text-sm/6 font-semibold text-gray-900"
           >
+            Showroom
+          </Link>
+          <Link to="/about" className="text-sm/6 font-semibold text-gray-900">
             About us
           </Link>
           <Link to="/contact" className="text-sm/6 font-semibold text-gray-900">
             Contact
           </Link>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4 lg:items-center">
+          <Link to="/login" className="text-sm/6 font-semibold text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
+          <Button
+            color="default"
+            variant="solid"
+            onClick={() => navigate("/register")}
+          >
+            Register now
+          </Button>
         </div>
+        <ProfileAvatar />
       </nav>
       <Dialog
         open={mobileMenuOpen}
@@ -239,12 +250,19 @@ export default function Example() {
                 </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Log in
-                </a>
+                </Link>
+                <Button
+                  color="default"
+                  variant="solid"
+                  onClick={() => navigate("/register")}
+                >
+                  Register now
+                </Button>
               </div>
             </div>
           </div>
