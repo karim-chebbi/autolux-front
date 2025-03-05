@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { registerUser } from "../JS/Actions/AuthActions";
 
 export default function Register() {
+      const dispatch = useDispatch()
+      const navigate = useNavigate()
+
+            const [newUser, setNewUser] = useState({});
+
+            const handleInputChange = (e) => {
+              setNewUser({ ...newUser, [e.target.name]: e.target.value });
+            };
+
+            const handleRegister = (e) => {
+              e.preventDefault();
+              dispatch(registerUser(newUser, navigate));
+            };
+
+            console.log(newUser)
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -24,7 +34,7 @@ export default function Register() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleRegister} method="POST" className="space-y-6">
             <div className="flex gap-4">
               <div className="sm:col-span-3">
                 <label
@@ -35,6 +45,7 @@ export default function Register() {
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={(e) => handleInputChange(e)}
                     id="firstName"
                     name="firstName"
                     type="text"
@@ -53,6 +64,7 @@ export default function Register() {
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={(e) => handleInputChange(e)}
                     id="lastName"
                     name="lastName"
                     type="text"
@@ -71,6 +83,7 @@ export default function Register() {
               </label>
               <div className="mt-2">
                 <input
+                  onChange={(e) => handleInputChange(e)}
                   id="email"
                   name="email"
                   type="email"
@@ -89,6 +102,7 @@ export default function Register() {
               </label>
               <div className="mt-2">
                 <input
+                  onChange={(e) => handleInputChange(e)}
                   id="phone"
                   name="phone"
                   type="number"
@@ -118,6 +132,7 @@ export default function Register() {
               </div>
               <div className="mt-2">
                 <input
+                  onChange={(e) => handleInputChange(e)}
                   id="password"
                   name="password"
                   type="password"

@@ -9,9 +9,13 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../JS/Actions/AuthActions';
 
 const ProfileAvatar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   return (
     <Menu as="div" className="relative ml-3">
       <div>
@@ -47,7 +51,7 @@ const ProfileAvatar = () => {
         </MenuItem>
         <MenuItem>
           <a
-            href="#"
+            onClick={()=> dispatch(logoutUser(navigate))}
             className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
           >
             Sign out
