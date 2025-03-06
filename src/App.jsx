@@ -14,6 +14,8 @@ import Profile from './components/Profile'
 import Login from './components/Login'
 import Register from './components/Register'
 import { currentUser } from './JS/Actions/AuthActions'
+import SuccessNotifications from './components/SuccessNotifications'
+import ErrorsNotifications from './components/ErrorsNotifications'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -26,27 +28,35 @@ const App = () => {
             dispatch(currentUser());
           }
   }, [dispatch])
-  
 
-  console.log(isAuth)
+
+  const authSuccess = useSelector(state=> state.authReducer.success)
+  const authErrors = useSelector(state=> state.authReducer.errors)
+  
+console.log("Errors :" + authErrors);
+
   return (
     <>
-      <Navbar /> 
+      <Navbar />
       {load && <Spinner />}
+      {authSuccess && authSuccess.map((success) => <SuccessNotifications key={success.id} success={success} />)}
+      {authErrors && authErrors.map((error) => <ErrorsNotifications key={error.id} error={error} />)}
       <Routes>
-        <Route path='/' element={ <Home /> } />
-        <Route path='/showroom' element={ <Showroom /> } />
-        <Route path='/contact' element={ <Contact /> } />
-        <Route path='/about' element={ <About /> } />
-        <Route path='/*' element={ <ErrorPage /> } />
-        <Route path='/car_description/:id' element={ <CarDescription /> } />
-        <Route path='/profile' element={ <Profile /> } />
-        <Route path='/login' element={ <Login /> } />
-        <Route path='/register' element={ <Register /> } />
-      </Routes> 
+        <Route path="/" element={<Home />} />
+        <Route path="/showroom" element={<Showroom />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/car_description/:id" element={<CarDescription />} />
+
+        {isAuth && <Route path="/profile" element={<Profile />} />}
+
+        {!isAuth && <Route path="/login" element={<Login />} />}
+        {!isAuth && <Route path="/register" element={<Register />} />}
+      </Routes>
       <Footer />
-    </>  
-  )
+    </>
+  );
 }
 
 export default App

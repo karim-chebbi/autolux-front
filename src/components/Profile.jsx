@@ -1,6 +1,10 @@
 import { PaperClipIcon } from "@heroicons/react/20/solid";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
+  const user = useSelector(state=> state.authReducer.user)
+
+  console.log(user)
   return (
     <div className="px-4 lg:px-16 py-8">
       <div className="px-4 sm:px-0">
@@ -14,17 +18,15 @@ export default function Profile() {
       <div className="mt-6 border-t border-gray-100">
         <dl className="divide-y divide-gray-100">
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Full name</dt>
+            <dt className="text-sm/6 font-medium text-gray-900">First name</dt>
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Margot Foster
+              {user && user.firstName}
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">
-              Application for
-            </dt>
+            <dt className="text-sm/6 font-medium text-gray-900">Last Name</dt>
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Backend Developer
+              {user && user.lastName}
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -32,7 +34,7 @@ export default function Profile() {
               Email address
             </dt>
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              margotfoster@example.com
+              {user && user.email}
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

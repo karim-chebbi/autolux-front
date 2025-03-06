@@ -28,6 +28,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Link, useNavigate } from "react-router-dom";
 import ProfileAvatar from "./ProfileAvatar";
+import { useSelector } from "react-redux";
 
 const products = [
   {
@@ -70,6 +71,11 @@ export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate()
+
+
+  const isAuth = useSelector(state=> state.authReducer.isAuth)
+
+  
 
   return (
     <header className="bg-white/30 backdrop-blur-sm sticky top-0 z-40 w-full hover:backdrop-blur-lg transition-all duration-300">
@@ -167,19 +173,23 @@ export default function Example() {
             Contact
           </Link>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4 lg:items-center">
-          <Link to="/login" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
-          <Button
-            color="default"
-            variant="solid"
-            onClick={() => navigate("/register")}
-          >
-            Register now
-          </Button>
-        </div>
-        <ProfileAvatar />
+
+        {isAuth ? (
+          <ProfileAvatar />
+        ) : (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4 lg:items-center">
+            <Link to="/login" className="text-sm/6 font-semibold text-gray-900">
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+            <Button
+              color="default"
+              variant="solid"
+              onClick={() => navigate("/register")}
+            >
+              Register now
+            </Button>
+          </div>
+        )}
       </nav>
       <Dialog
         open={mobileMenuOpen}
@@ -249,21 +259,25 @@ export default function Example() {
                   Contact
                 </Link>
               </div>
-              <div className="py-6">
-                <Link
-                  to="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </Link>
-                <Button
-                  color="default"
-                  variant="solid"
-                  onClick={() => navigate("/register")}
-                >
-                  Register now
-                </Button>
-              </div>
+              {isAuth ? (
+                <ProfileAvatar />
+              ) : (
+                <div className="py-6">
+                  <Link
+                    to="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >
+                    Log in
+                  </Link>
+                  <Button
+                    color="default"
+                    variant="solid"
+                    onClick={() => navigate("/register")}
+                  >
+                    Register now
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </DialogPanel>

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CURRENT_USER, LOGIN_USER_FAIL, LOGIN_USER_LOAD, LOGIN_USER_SUCCESS, LOGOUT_USER, REGISTER_USER_FAIL, REGISTER_USER_LOAD, REGISTER_USER_SUCCESS } from "../ActionTypes/AuthActionTypes"
+import { CLEAR_ERRORS_AUTH, CLEAR_SUCCESS_AUTH, CURRENT_USER, LOGIN_USER_FAIL, LOGIN_USER_LOAD, LOGIN_USER_SUCCESS, LOGOUT_USER, REGISTER_USER_FAIL, REGISTER_USER_LOAD, REGISTER_USER_SUCCESS } from "../ActionTypes/AuthActionTypes"
 
 
 export const registerUser = (newUser, navigate) => async (dispatch) => {
@@ -9,7 +9,7 @@ export const registerUser = (newUser, navigate) => async (dispatch) => {
         dispatch({type: REGISTER_USER_SUCCESS, payload: result.data})
         navigate('/showroom')
     } catch (error) {
-        dispatch({type: REGISTER_USER_FAIL,payload: error.message})
+        dispatch({ type: REGISTER_USER_FAIL, payload: error.response.data });
     }
 }
 
@@ -20,7 +20,7 @@ export const loginUser = (user, naviagate) => async (dispatch) => {
         dispatch({type: LOGIN_USER_SUCCESS, payload: result.data})
         naviagate('/showroom')
     } catch (error) {
-        dispatch({ type: LOGIN_USER_FAIL, payload: error.response.data.errors[0].msg });
+        dispatch({ type: LOGIN_USER_FAIL, payload: error.response.data });
     }
 }
 
@@ -45,5 +45,19 @@ export const currentUser = () => async (dispatch) => {
                   payload: error.response.data.errors,
                 });
 
+    }
+}
+
+
+export const clearSuccess = () => {
+    return {
+        type: CLEAR_SUCCESS_AUTH
+    }
+}
+
+
+export const clearErrors = () => {
+    return {
+        type: CLEAR_ERRORS_AUTH
     }
 }
