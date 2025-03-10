@@ -74,6 +74,8 @@ export default function Example() {
 
 
   const isAuth = useSelector(state=> state.authReducer.isAuth)
+      const user = useSelector((state) => state.authReducer.user);
+      const isAdmin = user && user.isAdmin;
 
   
 
@@ -172,6 +174,11 @@ export default function Example() {
           <Link to="/contact" className="text-sm/6 font-semibold text-gray-900">
             Contact
           </Link>
+          {isAuth && isAdmin && (
+            <Link to="/users" className="text-sm/6 font-semibold text-gray-900">
+              Users
+            </Link>
+          )}
         </PopoverGroup>
 
         {isAuth ? (
@@ -258,6 +265,14 @@ export default function Example() {
                 >
                   Contact
                 </Link>
+                {isAuth && isAdmin && (
+                  <Link
+                    to="/users"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >
+                    Users
+                  </Link>
+                )}
               </div>
               {isAuth ? (
                 <ProfileAvatar />

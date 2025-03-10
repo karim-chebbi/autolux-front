@@ -9,17 +9,13 @@ const navigation = [
 
 export default function Hero() {
   return (
-    <div className="bg-white w-full h-screen">
-
-
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+    <div data-aos="fade-up" className="bg-white w-full h-screen">
+      <div className="relative isolate px-6 pt-2 lg:px-8">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        >
-
-        </div>
-        <div className="mx-auto max-w-2xl py-32 lg:py-24">
+        ></div>
+        <div className="mx-auto max-w-2xl py-12">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next round of funding.{" "}
@@ -30,12 +26,19 @@ export default function Hero() {
             </div>
           </div>
           <div className="text-center">
-            <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">
-              Data to enrich your online business
+            <h1
+              data-aos="fade-up"
+              className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl"
+            >
+              AutoLux: Your Dream Car Delivered
             </h1>
-            <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.
+            <p
+              data-aos="fade-up"
+              className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8"
+            >
+              AutoLux offers a premium online car buying experience, providing a
+              wide selection of luxury vehicles with fast delivery, exceptional
+              service, and complete customer satisfaction guaranteed.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
@@ -53,9 +56,7 @@ export default function Hero() {
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        >
-
-        </div>
+        ></div>
       </div>
     </div>
   );

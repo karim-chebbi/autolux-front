@@ -8,8 +8,10 @@ export default function Example() {
   const [agreed, setAgreed] = useState(false);
 
   return (
-    <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
-
+    <div
+      data-aos="fade-up"
+      className="isolate bg-white px-6 py-8 sm:py-12 lg:px-8"
+    >
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">
           Contact sales

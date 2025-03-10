@@ -16,12 +16,16 @@ import Register from './components/Register'
 import { currentUser } from './JS/Actions/AuthActions'
 import SuccessNotifications from './components/SuccessNotifications'
 import ErrorsNotifications from './components/ErrorsNotifications'
+import ScrollToTop from './components/ScrollToTop'
+import UserList from './pages/UserList'
 
 const App = () => {
   const dispatch = useDispatch()
   const load = useSelector(state=> state.carReducer.load)
 
-  const isAuth = useSelector(state=> state.authReducer.isAuth)
+    const user = useSelector(state=> state.authReducer.user)
+    const isAdmin = user && user.isAdmin
+    const isAuth = useSelector(state=> state.authReducer.isAuth)
 
   useEffect(() => {
           if (localStorage.getItem("token")) {
@@ -29,28 +33,27 @@ const App = () => {
           }
   }, [dispatch])
 
-
   const authSuccess = useSelector(state=> state.authReducer.success)
   const authErrors = useSelector(state=> state.authReducer.errors)
-  
-console.log("Errors :" + authErrors);
+
+  console.log(isAdmin);
 
   return (
     <>
       <Navbar />
+      <ScrollToTop />
       {load && <Spinner />}
       {authSuccess && authSuccess.map((success) => <SuccessNotifications key={success.id} success={success} />)}
       {authErrors && authErrors.map((error) => <ErrorsNotifications key={error.id} error={error} />)}
       <Routes>
+        { isAuth && isAdmin &&  <Route path="/users" element={ <UserList /> } />} 
         <Route path="/" element={<Home />} />
         <Route path="/showroom" element={<Showroom />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/*" element={<ErrorPage />} />
         <Route path="/car_description/:id" element={<CarDescription />} />
-
         {isAuth && <Route path="/profile" element={<Profile />} />}
-
         {!isAuth && <Route path="/login" element={<Login />} />}
         {!isAuth && <Route path="/register" element={<Register />} />}
       </Routes>
